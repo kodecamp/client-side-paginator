@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Paginator</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+  <script src="paginator.js"></script>
+  <script src="dummy-data.js"></script>
+  <script src="records-view.js"></script>
+  <div class="main">
+    <div class="records">
+    </div>
+    <div class="btn-panel">
+      <button id="previous" class="btn">Previous</button>
+      <button id="next" class="btn">Next</button>
+    </div>
+  </div>
+  <script>
+
+  const paginator = new Paginator(records, 15);
+  let page = paginator.next();
+  
+  updatePage(page);
+  toggleButtons(paginator);
+
+  document.querySelector('#next').addEventListener('click', function() {
+    let page = paginator.next();
+    updatePage(page);
+    toggleButtons(paginator);
+  });
+
+  document.querySelector('#previous').addEventListener('click', function() {
+    let page = paginator.previous();
+    updatePage(page);
+    toggleButtons(paginator);
+  });
+
+  function updatePage(page) {
+
+    let compiledTemplate = page ? recordsView(page._items) : 'No more records buddy ;)';
+    const recordsContainer = document.querySelector('.main .records');
+    recordsContainer.innerHTML = compiledTemplate;
+
+  }
+
+  function toggleButtons(paginator) {
+    let nextBtn = document.querySelector('#next');
+    let previousBtn = document.querySelector('#previous');
+    if (paginator.hasNext()) {
+
+      nextBtn.classList.remove('btn-disabled');
+    } else {
+
+      nextBtn.classList.add('btn-disabled');
+    }
+
+    if (paginator.hasPrevious()) {
+      previousBtn.classList.remove('btn-disabled');
+    } else {
+      previousBtn.classList.add('btn-disabled');
+    }
+
+  }
+  </script>
+</body>
+
+</html>

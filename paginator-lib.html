@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Paginator</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+  <script src="paginator.js"></script>
+  <script src="dummy-data.js"></script>
+  <script src="records-view.js"></script>
+  <script src="paginator-ctrl.js"></script>
+  <div class="main">
+    <div id="records">
+    </div>
+    <div class="btn-panel">
+      <button id="prevBtn" class="btn">Previous</button>
+      <button id="nextBtn" class="btn">Next</button>
+    </div>
+  </div>
+  <script>
+
+  const paginator = new Paginator(records, 15);
+  paginationCtrl(paginator,{
+    nextBtnId: 'nextBtn',
+    prevBtnId: 'prevBtn',
+    recordContainerId: 'records',
+    disabledStyleClass: 'btn-disabled',
+    templateGeneratorFn: pageViewGenerator
+  });
+  
+  </script>
+</body>
+
+</html>
